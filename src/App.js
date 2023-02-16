@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import './App.css';
 import logo from './logo.svg';
 
@@ -21,18 +22,40 @@ function App() {
     setContador(obj['value']);
   }
 
+  const reset = async () => {
+    console.log("reiniciar");
+    const res = await fetch('http://localhost:5050/reset')
+    const obj = await res.json();
+    setContador(obj['value']);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to the final project of the subject "Software Engineering 3".
-        </p>
+    <div className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <p>
+        Welcome to the final project of the subject "Software Engineering 3".
+      </p>
+      <div>
+        <div className="botons">
+          <TextField 
+          id="outlined-basic"
+          label="Value"
+          variant="outlined"
+          color="primary"
+          />
+        </div>
         <div>
-          <Button variant="contained"  onClick = {add}>Sumar</Button>
-          <Button variant="outlined" onClick = {subtract}>Restar</Button>
-        </div>      
-      </header>
+          <div>
+            <Button variant="contained" onClick={add}>Add</Button>
+          </div>
+          <div>
+            <Button variant="contained" onClick={subtract}>Subtract</Button>
+          </div>
+          <div>
+            <Button variant="contained" onClick={reset}>Restart</Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
