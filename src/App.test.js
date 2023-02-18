@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 
-describe('Operators module', () => {
+describe('App render', () => {
   test('Render Botons', () => {
     render(<App />);
 
