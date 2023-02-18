@@ -3,6 +3,7 @@ RUN apk update
 WORKDIR /app
 COPY . /app/
 RUN npm ci
+ARG REACT_APP_BACK_URL
 RUN npm run build
 
 FROM nginx:1.23.2-alpine 
