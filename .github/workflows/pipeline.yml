@@ -1,0 +1,33 @@
+name: Deploy to Railway
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+env:
+  REACT_APP_BACK_URL: https://backend-production-1abf.up.railway.app
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node 19
+        uses: actions/setup-node@v1
+        with:
+          node-version: 19.x
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Install Railway
+        run: npm i -g @railway/cli
+
+      - name: Deploy
+        run: railway up -s frontend-final
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}

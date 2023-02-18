@@ -8,29 +8,29 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [contador, setContador] = useState(0);
-  
+
   useEffect(() => {
     (async () => {
-      const res = await fetch( 'http://localhost:5050/value' );
+      const res = await fetch(process.env.REACT_APP_BACK_URL + '/value');
       const obj = await res.json();
       setContador(obj['value']);
     })();
   }, []);
 
   const add = async () => {
-    const res = await fetch('https://backend-final-production.up.railway.app/add/2');
+    const res = await fetch(process.env.REACT_APP_BACK_URL + '/add/2');
     const obj = await res.json();
     setContador(obj['value']);
   };
 
   const subtract = async () => {
-    const res = await fetch('https://backend-final-production.up.railway.app/subtract/3');
+    const res = await fetch(process.env.REACT_APP_BACK_URL + '/subtract/3');
     const obj = await res.json();
     setContador(obj['value']);
   };
 
   const reset = async () => {
-    const res = await fetch('https://backend-final-production.up.railway.app/reset');
+    const res = await fetch(process.env.REACT_APP_BACK_URL + '/reset');
     var obj = await res.json();
     setContador(obj['value']);
   };
