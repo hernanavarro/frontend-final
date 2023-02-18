@@ -4,44 +4,51 @@ import TextField from '@mui/material/TextField';
 import './App.css';
 import logo from './logo.svg';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
-
   const [contador, setContador] = useState(0);
-  //const [contador, setContador] = useState(0);
+  
+  useEffect(() => {
+    (async () => {
+      const res = await fetch( 'http://localhost:5050/value' );
+      const obj = await res.json();
+      setContador(obj['value']);
+    })();
+  }, []);
+
   const add = async () => {
-    const res = await fetch('http://localhost:5050/add/2')
+    const res = await fetch('https://backend-final-production.up.railway.app/add/2');
     const obj = await res.json();
     setContador(obj['value']);
-  }
+  };
 
   const subtract = async () => {
-    const res = await fetch('http://localhost:5050/subtract/3')
+    const res = await fetch('https://backend-final-production.up.railway.app/subtract/3');
     const obj = await res.json();
     setContador(obj['value']);
-  }
+  };
 
   const reset = async () => {
-    console.log("reiniciar");
-    const res = await fetch('http://localhost:5050/reset')
-    const obj = await res.json();
+    const res = await fetch('https://backend-final-production.up.railway.app/reset');
+    var obj = await res.json();
     setContador(obj['value']);
-  }
+  };
 
   return (
     <div className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
-      <p>
+      <h3>
         Welcome to the final project of the subject "Software Engineering 3".
-      </p>
+      </h3>
+      <p> Contador: {contador} </p>
       <div>
         <div className="botons">
-          <TextField 
-          id="outlined-basic"
-          label="Value"
-          variant="outlined"
-          color="primary"
+          <TextField
+            id="outlined-basic"
+            label="Value"
+            variant="outlined"
+            color="primary"
           />
         </div>
         <div>
