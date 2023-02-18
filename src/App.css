@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #C0A49E;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -41,4 +41,9 @@
 .botons{
   margin-top: 20x !important;
   padding: 20px;
+}
+
+.linea{
+  display: inline-block;
+  margin: 5px;
 }

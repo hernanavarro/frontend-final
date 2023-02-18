@@ -2,64 +2,67 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import './App.css';
-import logo from './logo.svg';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [contador, setContador] = useState(0);
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(process.env.REACT_APP_BACK_URL + '/value');
+      const res = await fetch('http://localhost:5050/value');
       const obj = await res.json();
-      setContador(obj['value']);
+      setContador(obj["value"]);
     })();
   }, []);
 
   const add = async () => {
-    const res = await fetch(process.env.REACT_APP_BACK_URL + '/add/2');
+    const res = await fetch('http://localhost:5050/add/2');
     const obj = await res.json();
     setContador(obj['value']);
   };
 
   const subtract = async () => {
-    const res = await fetch(process.env.REACT_APP_BACK_URL + '/subtract/3');
+    const res = await fetch('http://localhost:5050/subtract/3');
     const obj = await res.json();
     setContador(obj['value']);
   };
 
   const reset = async () => {
-    const res = await fetch(process.env.REACT_APP_BACK_URL + '/reset');
+    const res = await fetch('http://localhost:5050/reset');
     var obj = await res.json();
     setContador(obj['value']);
   };
 
   return (
     <div className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
       <h3>
         Welcome to the final project of the subject "Software Engineering 3".
       </h3>
-      <p> Contador: {contador} </p>
+      <p> Counter: {contador} </p>
       <div>
         <div className="botons">
           <TextField
-            id="outlined-basic"
+            id="filled-basic"
             label="Value"
-            variant="outlined"
-            color="primary"
+            variant="filled"
+            defaultValue="0"
+            value={value}
+            onChange={() => {
+              setValue(value);
+            }}
           />
         </div>
         <div>
-          <div>
-            <Button id="btn" data-testid="btnAdd" variant="contained" onClick={add}>Add</Button>
+          <div className="linea">
+            <Button id="btn" data-testid="btnAdd" variant="contained" onClick={add} className="linea">Add</Button>
           </div>
-          <div>
-            <Button id="btn" data-testid="btnSubtract" variant="contained" onClick={subtract}>Subtract</Button>
+          <div className="linea">
+            <Button id="btn" data-testid="btnSubtract" variant="contained" onClick={subtract} className="linea">Subtract</Button>
           </div>
-          <div>
-            <Button id="btn" data-testid="btnReset" variant="contained" onClick={reset}>Restart</Button>
+          <div className="linea">
+            <Button id="btn" data-testid="btnReset" variant="contained" onClick={reset} className="linea">Restart</Button>
           </div>
         </div>
       </div>

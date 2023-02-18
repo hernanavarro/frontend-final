@@ -50,7 +50,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: hernannavarro/backend-final:${{ github.run_number }}
+          tags: hernannavarro/frontend-final:${{ github.run_number }}
 
   deploy-to-railway:
     runs-on: ubuntu-latest
