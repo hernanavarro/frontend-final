@@ -10,7 +10,7 @@ function App() {
   const [value, setValue] = useState();
 
   const sarasa = async () => {
-    const res = await fetch( process.env.REACT_APP_BACK_URL + '/value');
+    const res = await fetch( `${process.env.REACT_APP_BACK_URL}/value` );
       const obj = await res.json();
       console.log(obj);
       setContador(obj["value"]);
@@ -21,19 +21,19 @@ function App() {
   }, []);
 
   const add = async () => {
-    const res = await fetch(`http://localhost:5050/add/${value}`);
+    const res = await fetch( `${process.env.REACT_APP_BACK_URL}/add/${value}` );
     const obj = await res.json();
     setContador(obj['value']);
   };
 
   const subtract = async () => {
-    const res = await fetch(`http://localhost:5050/subtract/${value}`);
+    const res = await fetch( `${process.env.REACT_APP_BACK_URL}/subtract/${value}`);
     const obj = await res.json();
     setContador(obj['value']);
   };
 
   const reset = async () => {
-    const res = await fetch('http://localhost:5050/reset');
+    const res = await fetch( `${process.env.REACT_APP_BACK_URL}/reset` );
     var obj = await res.json();
     setContador(obj['value']);
   };
