@@ -7,24 +7,27 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [contador, setContador] = useState(0);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState();
+
+  const sarasa = async () => {
+    const res = await fetch( process.env.REACT_APP_BACK_URL + '/value');
+      const obj = await res.json();
+      console.log(obj);
+      setContador(obj["value"]);
+  };
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch('http://localhost:5050/value');
-      const obj = await res.json();
-      setContador(obj["value"]);
-    })();
+    sarasa();
   }, []);
 
   const add = async () => {
-    const res = await fetch('http://localhost:5050/add/2');
+    const res = await fetch(`http://localhost:5050/add/${value}`);
     const obj = await res.json();
     setContador(obj['value']);
   };
 
   const subtract = async () => {
-    const res = await fetch('http://localhost:5050/subtract/3');
+    const res = await fetch(`http://localhost:5050/subtract/${value}`);
     const obj = await res.json();
     setContador(obj['value']);
   };
@@ -47,11 +50,8 @@ function App() {
             id="filled-basic"
             label="Value"
             variant="filled"
-            defaultValue="0"
             value={value}
-            onChange={() => {
-              setValue(value);
-            }}
+            onChange={(e) => setValue(e.target.value)}
           />
         </div>
         <div>
