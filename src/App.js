@@ -43,7 +43,7 @@ function App() {
       <h3>
         Welcome to the final project of the subject "Software Engineering 3".
       </h3>
-      <p> Counter: {contador} </p>
+      <p id="counter" > Counter: {contador} </p>
       <div>
         <div className="botons">
           <TextField
