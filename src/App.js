@@ -9,31 +9,31 @@ function App() {
   const [contador, setContador] = useState(0);
   const [value, setValue] = useState();
 
-  const sarasa = async () => {
-    const res = await fetch( `${process.env.REACT_APP_BACK_URL}/value` );
-      const obj = await res.json();
-      console.log(obj);
-      setContador(obj["value"]);
+  const fetchValue = async () => {
+    const res = await fetch(`${process.env.REACT_APP_BACK_URL}/value`);
+    const obj = await res.json();
+    console.log(obj);
+    setContador(obj["value"]);
   };
 
   useEffect(() => {
-    sarasa();
+    fetchValue();
   }, []);
 
   const add = async () => {
-    const res = await fetch( `${process.env.REACT_APP_BACK_URL}/add/${value}` );
+    const res = await fetch(`${process.env.REACT_APP_BACK_URL}/add/${value}`);
     const obj = await res.json();
     setContador(obj['value']);
   };
 
   const subtract = async () => {
-    const res = await fetch( `${process.env.REACT_APP_BACK_URL}/subtract/${value}`);
+    const res = await fetch(`${process.env.REACT_APP_BACK_URL}/subtract/${value}`);
     const obj = await res.json();
     setContador(obj['value']);
   };
 
   const reset = async () => {
-    const res = await fetch( `${process.env.REACT_APP_BACK_URL}/reset` );
+    const res = await fetch(`${process.env.REACT_APP_BACK_URL}/reset`);
     var obj = await res.json();
     setContador(obj['value']);
   };
