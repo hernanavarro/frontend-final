@@ -1,19 +1,14 @@
 name: ci/cd - FE
-
 on:
   workflow_dispatch:
-
   push:
     branches: [main]
-
 env:
   REACT_APP_BACK_URL : https://backend-final-production.up.railway.app
-
 
 jobs:
   unit-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -52,7 +47,7 @@ jobs:
           push: true
           tags: hernannavarro/frontend-final:${{ github.run_number }}
 
-  deploy-to-railway:
+  deploy-railway:
     runs-on: ubuntu-latest
     needs: build-push-docker
     steps:
@@ -71,3 +66,26 @@ jobs:
         run: railway up -s frontend-final
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+integration-test:
+    runs-on: ubuntu-latest
+    needs: deploy-railway
+    steps:
+      - name: Get Integration Test Repository
+        uses: actions/checkout@v3
+        with:
+          repository: hernanavarro/integracion-final
+          path: integracion-final
+
+      - name: Use Node 19
+        uses: actions/setup-node@v1
+        with:
+          node-version: 19.x
+
+      - name: Install packages
+        working-directory: ./integracion-final
+        run: npm ci
+
+      - name: Run integration test with report
+        working-directory: ./integracion-final
+        run: TESTOMATIO=${{secrets.TESTOMATIO_API_KEY}} npx codeceptjs run
