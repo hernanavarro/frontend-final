@@ -56,13 +56,13 @@ function App() {
         </div>
         <div>
           <div className="linea">
-            <Button id="btn" data-testid="btnAdd" variant="contained" onClick={add} className="linea">Add</Button>
+            <Button id="btn-add" data-testid="btnAdd" variant="contained" onClick={add} className="linea">Add</Button>
           </div>
           <div className="linea">
-            <Button id="btn" data-testid="btnSubtract" variant="contained" onClick={subtract} className="linea">Subtract</Button>
+            <Button id="btn-subtract" data-testid="btnSubtract" variant="contained" onClick={subtract} className="linea">Subtract</Button>
           </div>
           <div className="linea">
-            <Button id="btn" data-testid="btnReset" variant="contained" onClick={reset} className="linea">Restart</Button>
+            <Button id="btn-restart" data-testid="btnReset" variant="contained" onClick={reset} className="linea">Restart</Button>
           </div>
         </div>
       </div>
