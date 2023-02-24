@@ -41,7 +41,7 @@ function App() {
   return (
     <div className="App-header">
       <h3>
-        Welcome to the final project of the subject "Software Engineering 3".
+        Goodbye to the final project of the subject "Software Engineering 3".
       </h3>
       <p id="counter" > Counter: {contador} </p>
       <div>
