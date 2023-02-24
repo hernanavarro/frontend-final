@@ -10,7 +10,7 @@ describe('App render', () => {
     const buttonAdd = screen.getByTestId("btnAdd");
     expect(buttonAdd).toBeInTheDocument();
     expect(buttonAdd.id).toMatch("btn-add");
-    expect(buttonAdd.textContent).toMatch("Sumar");
+    expect(buttonAdd.textContent).toMatch("Add");
 
     // btn Subtract
     const buttonSubtract = screen.getByTestId("btnSubtract");
@@ -22,6 +22,6 @@ describe('App render', () => {
     const buttonReset = screen.getByTestId("btnReset");
     expect(buttonReset).toBeInTheDocument();
     expect(buttonReset.id).toMatch("btn-restart");
-    expect(buttonReset.textContent).toMatch("Reiniciar");
+    expect(buttonReset.textContent).toMatch("Restart");
   });
 });
